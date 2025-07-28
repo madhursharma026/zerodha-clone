@@ -62,8 +62,16 @@
     }
 }
 
+.headerBoxShadowAfter1125px {
+    display: none;
+}
+
 @media (max-width: 1125px) {
     .headerBoxShadow {
         display: none;
+    }
+
+    .headerBoxShadowAfter1125px {
+        display: block;
     }
 }
