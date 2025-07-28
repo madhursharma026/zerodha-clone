@@ -5,7 +5,7 @@ export default function useTheme() {
 
   // Load theme from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('theme') || 'light'
+    const stored = localStorage.getItem('zerodhaKiteCloneTheme') || 'light'
     setTheme(stored)
     document.body.classList.add(`${stored}-mode`)
   }, [])
@@ -16,7 +16,7 @@ export default function useTheme() {
     document.body.classList.remove(`${theme}-mode`)
     document.body.classList.add(`${newTheme}-mode`)
 
-    localStorage.setItem('theme', newTheme)
+    localStorage.setItem('zerodhaKiteCloneTheme', newTheme)
     setTheme(newTheme)
   }
 

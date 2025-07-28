@@ -28,3 +28,20 @@
         display: none;
     }
 }
+
+.tableRow {
+    height: 32px;
+}
+
+.nameColumn {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.valueColumn {
+    white-space: nowrap;
+    text-align: right;
+}

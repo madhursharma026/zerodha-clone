@@ -3,20 +3,20 @@ body.light-mode {
   color: black;
 }
 
-body.dark-mode {
+/* body.dark-mode {
   background-color: #121212;
   color: white;
-}
+} */
 
 body.light-mode .bodyContainer {
   background-color: white;
   color: black;
 }
 
-body.dark-mode .bodyContainer {
+/* body.dark-mode .bodyContainer {
   background-color: black;
   color: white;
-}
+} */
 
 .smallFontSize {
   font-size: 9px;

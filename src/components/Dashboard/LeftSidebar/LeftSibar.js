@@ -5,9 +5,9 @@ import styles from './LeftSidebar.module.css'
 
 export default function LeftSidebar() {
   const data = Array.from({ length: 35 }).map(() => ({
-    name: 'NBCC',
-    change: -4.43,
-    percent: -3.9,
+    name: 'NBCC NBCC NBCC NBCC NBCC NBCC NBCC NBCC NBCC ',
+    change: -400.43,
+    percent: -312510.9,
     price: 109.25,
   }))
 
@@ -36,9 +36,13 @@ export default function LeftSidebar() {
       </div>
 
       <div className={`${styles.scrollContainer}`}>
-        <Table responsive className="mediumFontSize border">
+        <Table
+          responsive
+          className="mediumFontSize border"
+          style={{ tableLayout: 'fixed', width: '100%' }}
+        >
           <tbody>
-            <tr style={{ height: '32px' }}>
+            <tr className={styles.tableRow}>
               <td className="smallFontSize">Default</td>
               <td></td>
               <td></td>
@@ -46,13 +50,15 @@ export default function LeftSidebar() {
             </tr>
 
             {data.map((item, index) => (
-              <tr key={index} style={{ height: '32px' }}>
-                <td className="text-danger">{item.name}</td>
-                <td style={{ maxWidth: '10px' }}>{item.change}%</td>
-                <td style={{ maxWidth: '20px' }} className="text-danger">
+              <tr key={index} className={styles.tableRow}>
+                <td className={`text-danger ${styles.nameColumn}`}>
+                  {item.name}
+                </td>
+                <td className={styles.valueColumn}>{item.change}%</td>
+                <td className={`text-danger ${styles.valueColumn}`}>
                   {item.percent}% <span>▼</span>
                 </td>
-                <td style={{ maxWidth: '10px' }} className="text-danger">
+                <td className={`text-danger ${styles.valueColumn}`}>
                   {item.price}
                 </td>
               </tr>
