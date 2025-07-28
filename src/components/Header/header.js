@@ -91,7 +91,7 @@ const Header = () => {
         </div>
       </div>
       <div
-        className={`${styles.headerBoxShadowAfter1125px} containerWidthGlobalCSS px-sm-2 px-4 align-items-center justify-content-between py-2`}
+        className={`${styles.headerBoxShadowAfter1125px} containerWidthGlobalCSS px-2 align-items-center justify-content-between py-2`}
       >
         <div className="row">
           <div className="col-4">
