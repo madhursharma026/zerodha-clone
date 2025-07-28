@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className={styles.headerBoxShadow}>
       <div className="containerWidthGlobalCSS px-sm-2 px-4 align-items-center justify-content-between">
-        <Row className={styles.headerContainer}>
+        <Row>
           <Col className={styles.leftColumn}>
             <div className={`d-flex flex-wrap gap-3 ${styles.customFlexGap}`}>
               <div className="mediumFontSize text-muted">

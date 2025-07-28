@@ -1,7 +1,6 @@
 .headerBoxShadow {
     font-weight: 550;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px;
-    background-color: inherit;
 }
 
 .darkHeader {
@@ -63,7 +62,6 @@
     }
 }
 
-/* Optional: hide entire header on small screens */
 @media (max-width: 1125px) {
     .headerBoxShadow {
         display: none;

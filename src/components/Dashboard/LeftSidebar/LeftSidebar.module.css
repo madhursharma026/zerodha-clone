@@ -1,0 +1,30 @@
+@media (min-width: 1100px) {
+    .leftColumn {
+        max-width: 380px;
+    }
+}
+
+@media (min-width: 1281px) {
+    .leftColumn {
+        max-width: 430px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+}
+
+.leftColumn {
+    border-right: 1px solid #dad0d0;
+}
+
+.scrollContainer {
+    overflow-y: auto;
+    max-height: calc(100vh - 150px);
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+@media (max-width: 1125px) {
+    .leftColumnDisplay {
+        display: none;
+    }
+}
