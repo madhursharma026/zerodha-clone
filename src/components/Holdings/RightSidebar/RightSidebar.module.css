@@ -1,7 +1,9 @@
-/* Container spacing if needed */
 .Col {
     overflow-y: auto;
+    max-height: calc(100vh - 50px);
+    padding-bottom: 1rem;
 }
+
 
 .fs6Text {
     font-size: 14px;

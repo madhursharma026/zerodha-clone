@@ -280,8 +280,6 @@ export default function RightSidebar() {
           </span>
         </div>
       </div>
-      <br />
-      <br />
     </Col>
   )
 }

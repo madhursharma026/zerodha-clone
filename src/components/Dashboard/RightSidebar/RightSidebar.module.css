@@ -7,3 +7,9 @@
         border-right: 1px solid #dee2e6;
     }
 }
+
+.Col {
+    overflow-y: auto;
+    max-height: calc(100vh - 50px);
+    padding-bottom: 1rem;
+}
