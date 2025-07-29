@@ -1,0 +1,73 @@
+/* Container spacing if needed */
+.Col {
+    overflow-y: auto;
+}
+
+.fs6Text {
+    font-size: 14px;
+    margin-right: 0.5rem;
+}
+
+.filterSelect {
+    max-width: 100px;
+    font-size: 12px;
+    height: 25px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+}
+
+.searchGroup {
+    max-width: 120px;
+    height: 25px;
+}
+
+.inputGroupText {
+    font-size: 12px;
+    height: 25px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0;
+}
+
+.searchInput {
+    font-size: 12px;
+    height: 25px;
+    border-radius: 0;
+}
+
+.iconLink {
+    transition: color 0.2s ease;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.iconLink:hover {
+    color: #0a58ca;
+}
+
+.divider {
+    color: #dad0d0;
+    margin: 0;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+    margin-top: 2px;
+}
+
+.subValue {
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.metricBox {
+    padding-left: 8px;
+}

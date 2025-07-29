@@ -1,4 +1,6 @@
 import useTheme from '@/hooks/useTheme'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Col, Row } from 'react-bootstrap'
 import { FaRegBell } from 'react-icons/fa'
 import { FiShoppingCart } from 'react-icons/fi'
@@ -6,6 +8,7 @@ import styles from './header.module.css'
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme()
+  const pathname = usePathname()
 
   return (
     <>
@@ -39,21 +42,27 @@ const Header = () => {
                   height={'14px'}
                 />
                 <div className="w-100 text-end">
-                  <span
-                    className={`mediumFontSize text-danger px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/'}
+                    className={`mediumFontSize ${
+                      pathname === '/' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Dashboard
-                  </span>
+                  </Link>
                   <span
                     className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Orders
                   </span>
-                  <span
-                    className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/holdings'}
+                    className={`mediumFontSize ${
+                      pathname === '/holdings' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Holdings
-                  </span>
+                  </Link>
                   <span
                     className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
                   >
@@ -115,7 +124,7 @@ const Header = () => {
               <FaRegBell />
             </span>
             <span
-              className={`mediumFontSize d-sm-inline d-none px-3 ${styles.navMenuHoverStyle}`}
+              className={`mediumFontSize d-md-inline d-none px-3 ${styles.navMenuHoverStyle}`}
             >
               XXX123
             </span>

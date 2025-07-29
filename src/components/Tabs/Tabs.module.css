@@ -1,0 +1,30 @@
+.tabContainer {
+    display: flex;
+    background: #fff;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f7f0f0;
+}
+
+.tabItem {
+    color: #333;
+    cursor: pointer;
+    position: relative;
+}
+
+.tabItem:hover {
+    color: #ff5722;
+}
+
+.active {
+    color: #f4511e;
+}
+
+.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -11px;
+    width: 100%;
+    height: 2px;
+    background-color: #f4511e;
+}

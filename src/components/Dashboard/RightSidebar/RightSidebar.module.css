@@ -5,13 +5,5 @@
 @media (min-width: 576px) {
     .borderEndOnlySm {
         border-right: 1px solid #dee2e6;
-        /* same as Bootstrap's border */
     }
-}
-
-.scrollContainer {
-    overflow-y: auto;
-    max-height: calc(100vh);
-    scrollbar-width: thin;
-    scrollbar-color: #ccc transparent;
 }

@@ -17,8 +17,7 @@ export default function RightSidebar() {
     }
   }, [])
   return (
-    // <Col className="px-4 py-3" style={{ overflowY: 'scroll', height: height }}>
-    <Col className={`px-4 py-3 ${styles.scrollContainer}`}>
+    <Col className={`px-4 py-3 rightSidebarScrollContainer`}>
       <p className="fs-4">Hi, Madhur</p>
       <hr style={{ color: '#dad0d0' }} />
       <div className="row">
