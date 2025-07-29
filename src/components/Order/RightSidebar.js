@@ -79,45 +79,6 @@ export default function RightSidebar() {
           </tbody>
         </Table>
 
-        <p className="fs-5 pt-3">Executed Orders (4)</p>
-
-        <Table className="bg-white d-none d-lg-table" hover>
-          <thead>
-            <tr className="mediumFontSize">
-              <th className="text-muted fw-normal">Time</th>
-              <th className="text-muted fw-normal">Type</th>
-              <th className="text-muted fw-normal">Instrument</th>
-              <th className="text-muted fw-normal">Product</th>
-              <th className="text-muted fw-normal">Qty.</th>
-              <th className="text-muted fw-normal">LTP</th>
-              <th className="text-muted fw-normal">Price</th>
-              <th className="text-muted fw-normal">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {executedOrderData.map((item) => (
-              <tr key={item.id} className="mediumFontSize">
-                <td>{item.Time}</td>
-                <td>
-                  <span className="px-2 py-1" style={{ background: '#ECF2FD' }}>
-                    {item.Type}
-                  </span>
-                </td>
-                <td>{item.Instrument}</td>
-                <td>{item.Product}</td>
-                <td>{item.Qty}</td>
-                <td>{item.LTP}</td>
-                <td>{item.Price}</td>
-                <td>
-                  <span className="px-2 py-1" style={{ background: '#ECECEC' }}>
-                    {item.Status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-
         {openOrderData.map((item) => (
           <Card
             key={item.id}
@@ -160,6 +121,45 @@ export default function RightSidebar() {
             </Card.Body>
           </Card>
         ))}
+
+        <p className="fs-5 pt-3">Executed Orders (4)</p>
+
+        <Table className="bg-white d-none d-lg-table" hover>
+          <thead>
+            <tr className="mediumFontSize">
+              <th className="text-muted fw-normal">Time</th>
+              <th className="text-muted fw-normal">Type</th>
+              <th className="text-muted fw-normal">Instrument</th>
+              <th className="text-muted fw-normal">Product</th>
+              <th className="text-muted fw-normal">Qty.</th>
+              <th className="text-muted fw-normal">LTP</th>
+              <th className="text-muted fw-normal">Price</th>
+              <th className="text-muted fw-normal">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {executedOrderData.map((item) => (
+              <tr key={item.id} className="mediumFontSize">
+                <td>{item.Time}</td>
+                <td>
+                  <span className="px-2 py-1" style={{ background: '#ECF2FD' }}>
+                    {item.Type}
+                  </span>
+                </td>
+                <td>{item.Instrument}</td>
+                <td>{item.Product}</td>
+                <td>{item.Qty}</td>
+                <td>{item.LTP}</td>
+                <td>{item.Price}</td>
+                <td>
+                  <span className="px-2 py-1" style={{ background: '#ECECEC' }}>
+                    {item.Status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
         {executedOrderData.map((item) => (
           <Card
