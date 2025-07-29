@@ -1,10 +1,10 @@
+import RightSidebar from '@/components/Bids/RightSidebar'
 import LeftSidebar from '@/components/Dashboard/LeftSidebar/LeftSibar'
 import Header from '@/components/Header/header'
-import RightSidebar from '@/components/Holdings/RightSidebar'
 import { useEffect, useState } from 'react'
 import { Card, Row } from 'react-bootstrap'
 
-export default function Holdings() {
+export default function Bids() {
   const [screenHeight, setScreenHeight] = useState(0)
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function Holdings() {
   return (
     <>
       <div className="bodyContainer">
-        <Header headerTitle="Holdings" />
+        <Header headerTitle="Dashboard" />
       </div>
 
       <div className="containerWidthGlobalCSS">

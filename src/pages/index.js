@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <div className="bodyContainer">
-        <Header />
+        <Header headerTitle="Dashboard" />
       </div>
 
       <div className="containerWidthGlobalCSS">

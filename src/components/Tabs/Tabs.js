@@ -1,19 +1,14 @@
-import { useState } from 'react'
 import styles from './Tabs.module.css'
 
-const Tabs = () => {
-  const tabs = ['All', 'Equity', 'Mutual funds']
-  const [activeTab, setActiveTab] = useState('Equity')
-
+const Tabs = ({ tabsName, activeTab }) => {
   return (
     <div className={styles.tabContainer}>
-      {tabs.map((tab) => (
+      {tabsName.map((tab) => (
         <div
           key={tab}
           className={`${styles.tabItem} px-3 mediumFontSize ${
             activeTab === tab ? styles.active : ''
           }`}
-          onClick={() => setActiveTab(tab)}
         >
           {tab}
         </div>

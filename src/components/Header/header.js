@@ -6,7 +6,7 @@ import { FaRegBell } from 'react-icons/fa'
 import { FiShoppingCart } from 'react-icons/fi'
 import styles from './header.module.css'
 
-const Header = () => {
+const Header = ({ headerTitle }) => {
   const { theme, toggleTheme } = useTheme()
   const pathname = usePathname()
 
@@ -48,7 +48,7 @@ const Header = () => {
                       pathname === '/' ? 'text-danger' : ''
                     } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
-                    Dashboard
+                    {headerTitle}
                   </Link>
                   <span
                     className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
@@ -68,11 +68,14 @@ const Header = () => {
                   >
                     Positions
                   </span>
-                  <span
-                    className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/bids'}
+                    className={`mediumFontSize ${
+                      pathname === '/bids' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Bids
-                  </span>
+                  </Link>
                   <span
                     className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
                   >
@@ -113,7 +116,7 @@ const Header = () => {
           </div>
           <div className="col-4 text-center">
             <span className="text-center">
-              <span className="fs-5">Dashboard</span>
+              <span className="fs-5">{headerTitle}</span>
             </span>
           </div>
           <div className="col-4 text-end">
