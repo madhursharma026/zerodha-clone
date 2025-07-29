@@ -1,0 +1,7 @@
+.rightColumn {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100dvh - 50px);
+    padding-bottom: 100px;
+    scrollbar-width: none;
+}

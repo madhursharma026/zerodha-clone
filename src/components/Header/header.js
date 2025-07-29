@@ -48,13 +48,16 @@ const Header = ({ headerTitle }) => {
                       pathname === '/' ? 'text-danger' : ''
                     } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
-                    {headerTitle}
+                    Dashboard
                   </Link>
-                  <span
-                    className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/orders'}
+                    className={`mediumFontSize ${
+                      pathname === '/orders' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Orders
-                  </span>
+                  </Link>
                   <Link
                     href={'/holdings'}
                     className={`mediumFontSize ${

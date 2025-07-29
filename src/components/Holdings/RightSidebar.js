@@ -9,6 +9,22 @@ import { SlMagnifier } from 'react-icons/sl'
 import styles from './RightSidebar.module.css'
 
 export default function RightSidebar() {
+  const holdingData = Array.from({ length: 5 }).map((_, i) => ({
+    id: i,
+    instrument: 'XXXXXXXXXX',
+    qty: '0000',
+    avgCost: '000.00',
+    ltp: '000.00',
+    invested: '0,00,000.00',
+    currentVal: '0,00,000.00',
+    pnl: '-00,000.00',
+    netChg: '-0.00%',
+    dayChg: '+0.00%',
+    pnlColor: 'text-danger',
+    netChgColor: 'text-danger',
+    dayChgColor: 'text-success',
+  }))
+
   return (
     <Col className={`px-4 py-2 rightSidebarScrollContainer`}>
       <div className={styles.rightColumn}>
@@ -118,118 +134,72 @@ export default function RightSidebar() {
             </tr>
           </thead>
           <tbody>
-            <tr className="mediumFontSize">
-              <td>XXXXXXXXXX</td>
-              <td>0000</td>
-              <td>000.00</td>
-              <td>000.00</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
-            <tr className="mediumFontSize">
-              <td>XXXXXXXXXX</td>
-              <td>0000</td>
-              <td>000.00</td>
-              <td>000.00</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
-            <tr className="mediumFontSize">
-              <td>XXXXXXXXXX</td>
-              <td>0000</td>
-              <td>000.00</td>
-              <td>000.00</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
-            <tr className="mediumFontSize">
-              <td>XXXXXXXXXX</td>
-              <td>0000</td>
-              <td>000.00</td>
-              <td>000.00</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
-            <tr className="mediumFontSize">
-              <td>XXXXXXXXXX</td>
-              <td>0000</td>
-              <td>000.00</td>
-              <td>000.00</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
-            <tr className="mediumFontSize fw-bold">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Total</td>
-              <td>0,00,000.00</td>
-              <td>0,00,000.00</td>
-              <td className="text-danger">-00,000.00</td>
-              <td className="text-danger">-0.00%</td>
-              <td className="text-success">+0.00%</td>
-            </tr>
+            {holdingData.map((item) => (
+              <tr key={item.id} className="mediumFontSize">
+                <td>{item.instrument}</td>
+                <td>{item.qty}</td>
+                <td>{item.avgCost}</td>
+                <td>{item.ltp}</td>
+                <td>{item.invested}</td>
+                <td>{item.currentVal}</td>
+                <td className={item.pnlColor}>{item.pnl}</td>
+                <td className={item.netChgColor}>{item.netChg}</td>
+                <td className={item.dayChgColor}>{item.dayChg}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
 
-        <Card
-          className="mt-3 d-block d-lg-none border-0 border-muted"
-          style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
-        >
-          <Card.Body>
-            <span>Instrument</span>
-            <p className="fw-normal">XXXXXXXXXX</p>
-            <div className="row">
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Qty.</span>
-                <p className="fw-normal">0000</p>
+        {holdingData.map((item) => (
+          <Card
+            key={item.id}
+            className="mt-3 d-block d-lg-none border-0 border-muted"
+            style={{ boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px' }}
+          >
+            <Card.Body>
+              <span>Instrument</span>
+              <p className="fw-normal">{item.instrument}</p>
+              <div className="row">
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Qty.</span>
+                  <p className="fw-normal">{item.qty}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Avg. cost</span>
+                  <p className="fw-normal">{item.avgCost}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>LTP</span>
+                  <p className="fw-normal">{item.ltp}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Invested</span>
+                  <p className="fw-normal">{item.invested}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Cur. Val</span>
+                  <p className="fw-normal">{item.currentVal}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>P&L</span>
+                  <p className={`fw-normal ${item.pnlColor}`}>{item.pnl}</p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Net Charg.</span>
+                  <p className={`fw-normal ${item.netChgColor}`}>
+                    {item.netChg}
+                  </p>
+                </div>
+                <div className="col-6 col-sm-4 col-md-3">
+                  <span>Day Chang.</span>
+                  <p className={`fw-normal ${item.dayChgColor}`}>
+                    {item.dayChg}
+                  </p>
+                </div>
               </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Avg. cost</span>
-                <p className="fw-normal">000.00</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>LTP</span>
-                <p className="fw-normal">000.00</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Invested</span>
-                <p className="fw-normal">0,00,000.00</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Cur. Val</span>
-                <p className="fw-normal">0,00,000.00</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>P&L</span>
-                <p className="fw-normal text-danger">-00,000.00</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Net Charg.</span>
-                <p className="fw-normal text-danger">-0.00%</p>
-              </div>
-              <div className="col-md-3 col-sm-4 col-6">
-                <span>Day Chang.</span>
-                <p className="fw-normal text-success">+0.00%</p>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
+            </Card.Body>
+          </Card>
+        ))}
 
         <Card
           className="mt-3 d-block d-lg-none border-0 border-muted"
