@@ -1,14 +1,19 @@
 import useTheme from '@/hooks/useTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Col, Row } from 'react-bootstrap'
+import { useState } from 'react'
+import { Col, Offcanvas, Row } from 'react-bootstrap'
 import { FaRegBell } from 'react-icons/fa'
 import { FiShoppingCart } from 'react-icons/fi'
+import { IoIosMenu } from 'react-icons/io'
 import styles from './header.module.css'
 
 const Header = ({ headerTitle }) => {
   const { theme, toggleTheme } = useTheme()
   const pathname = usePathname()
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -35,12 +40,14 @@ const Header = ({ headerTitle }) => {
 
             <Col>
               <div className={styles.verticalCenterText}>
-                <img
-                  src="https://kite.zerodha.com/static/images/kite-logo.svg"
-                  alt="#ImgNotFound"
-                  width={'21px'}
-                  height={'14px'}
-                />
+                <Link className="text-decoration-none" href="/">
+                  <img
+                    src="https://kite.zerodha.com/static/images/kite-logo.svg"
+                    alt="#ImgNotFound"
+                    width={'21px'}
+                    height={'14px'}
+                  />
+                </Link>
                 <div className="w-100 text-end">
                   <Link
                     href={'/'}
@@ -66,11 +73,14 @@ const Header = ({ headerTitle }) => {
                   >
                     Holdings
                   </Link>
-                  <span
-                    className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/positions'}
+                    className={`mediumFontSize ${
+                      pathname === '/positions' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Positions
-                  </span>
+                  </Link>
                   <Link
                     href={'/bids'}
                     className={`mediumFontSize ${
@@ -79,11 +89,14 @@ const Header = ({ headerTitle }) => {
                   >
                     Bids
                   </Link>
-                  <span
-                    className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+                  <Link
+                    href={'/funds'}
+                    className={`mediumFontSize ${
+                      pathname === '/funds' ? 'text-danger' : ''
+                    } text-decoration-none px-3 ${styles.navMenuHoverStyle}`}
                   >
                     Funds
-                  </span>
+                  </Link>
                   <span
                     className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
                   >
@@ -110,12 +123,14 @@ const Header = ({ headerTitle }) => {
       >
         <div className="row">
           <div className="col-4">
-            <img
-              src="https://kite.zerodha.com/static/images/kite-logo.svg"
-              alt="#ImgNotFound"
-              width={'21px'}
-              height={'14px'}
-            />
+            <Link className="text-decoration-none" href="/">
+              <img
+                src="https://kite.zerodha.com/static/images/kite-logo.svg"
+                alt="#ImgNotFound"
+                width={'21px'}
+                height={'14px'}
+              />
+            </Link>
           </div>
           <div className="col-4 text-center">
             <span className="text-center">
@@ -126,8 +141,11 @@ const Header = ({ headerTitle }) => {
             <span className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}>
               <FiShoppingCart />
             </span>
-            <span className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}>
-              <FaRegBell />
+            <span
+              className={`mediumFontSize px-3 ${styles.navMenuHoverStyle}`}
+              onClick={handleShow}
+            >
+              <IoIosMenu />
             </span>
             <span
               className={`mediumFontSize d-md-inline d-none px-3 ${styles.navMenuHoverStyle}`}
@@ -137,6 +155,61 @@ const Header = ({ headerTitle }) => {
           </div>
         </div>
       </div>
+
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        className={styles.headerOffCanvasDisplay}
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <Link href="/" className="text-decoration-none">
+              <img
+                src="https://kite.zerodha.com/static/images/kite-logo.svg"
+                alt="#ImgNotFound"
+                width="21px"
+                height="14px"
+              />
+            </Link>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+
+        <Offcanvas.Body>
+          <div className="d-flex flex-column">
+            {[
+              { href: '/', label: 'Dashboard' },
+              { href: '/orders', label: 'Orders' },
+              { href: '/holdings', label: 'Holdings' },
+              { href: '/positions', label: 'Positions' },
+              { href: '/bids', label: 'Bids' },
+              { href: '/funds', label: 'Funds' },
+            ].map(({ href, label }) => (
+              <Link
+                key={label}
+                href={href}
+                className={`mediumFontSize py-2 ${
+                  pathname === href ? 'text-danger' : ''
+                } text-decoration-none ${styles.navMenuHoverStyle}`}
+                onClick={handleClose}
+              >
+                {label}
+              </Link>
+            ))}
+
+            <div className="d-flex align-items-center gap-3 mt-3 px-1">
+              <span className={`mediumFontSize ${styles.navMenuHoverStyle}`}>
+                <FiShoppingCart />
+              </span>
+              <span className={`mediumFontSize ${styles.navMenuHoverStyle}`}>
+                <FaRegBell />
+              </span>
+              <span className={`mediumFontSize ${styles.navMenuHoverStyle}`}>
+                XXX123
+              </span>
+            </div>
+          </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   )
 }

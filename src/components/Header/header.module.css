@@ -75,3 +75,22 @@
         display: block;
     }
 }
+
+.headerOffCanvasDisplay {
+    display: none;
+}
+
+@media (max-width: 1125px) {
+    .headerOffCanvasDisplay {
+        display: block;
+    }
+}
+
+.headerOffCanvasDisplay {
+    width: 260px;
+}
+
+.navMenuHoverStyle:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
