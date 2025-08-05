@@ -1,37 +1,51 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Col, Form, InputGroup, Table } from 'react-bootstrap'
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import { IoFilterOutline } from 'react-icons/io5'
+import io from 'socket.io-client'
 import styles from './LeftSidebar.module.css'
 
 export default function LeftSidebar() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
+  const previousPricesRef = useRef({}) // holds old prices
 
   useEffect(() => {
-    const fetchPrices = async () => {
-      try {
-        const res = await fetch('/api/fetchPrices')
-        const json = await res.json()
-        if (json.success) {
-          const pricesArray = Object.entries(json.prices).map(
-            ([name, price]) => ({
-              name,
-              price: price.toFixed(2),
-              change: (Math.random() * 10 - 5).toFixed(2), // Simulated
-              percent: (Math.random() * 10 - 5).toFixed(2), // Simulated
-            })
-          )
-          setData(pricesArray)
-        }
-      } catch (err) {
-        console.error('Error fetching prices:', err)
-      } finally {
-        setLoading(false)
-      }
-    }
+    fetch('/api/socket') // trigger server socket init
+    const socket = io({ path: '/api/socket_io' })
 
-    fetchPrices()
+    socket.on('connect', () => {
+      console.log('🟢 Connected to WebSocket')
+    })
+
+    socket.on('prices', (prices) => {
+      const prev = previousPricesRef.current
+
+      const pricesArray = Object.entries(prices).map(([name, price]) => {
+        const previous = prev[name]
+
+        let change = 0
+        let percent = 0
+
+        if (previous !== undefined && previous !== 0) {
+          change = price - previous
+          percent = (change / previous) * 100
+        }
+
+        return {
+          name,
+          price: price.toFixed(2),
+          change: change.toFixed(2),
+          percent: percent.toFixed(2),
+        }
+      })
+
+      previousPricesRef.current = prices
+      setData(pricesArray)
+      setLoading(false)
+    })
+
+    return () => socket.disconnect()
   }, [])
 
   return (
@@ -49,16 +63,7 @@ export default function LeftSidebar() {
         </InputGroup.Text>
       </InputGroup>
 
-      <div className="row">
-        <div className="col-6">
-          <p className="smallFontSize">SCALPING 19/sep (97 / 250)</p>
-        </div>
-        <div className="col-6">
-          <p className="smallFontSize text-primary text-end">+ New Group</p>
-        </div>
-      </div>
-
-      <div className={`${styles.scrollContainer}`}>
+      <div className={styles.scrollContainer}>
         <Table
           responsive
           className="mediumFontSize border"
@@ -66,10 +71,10 @@ export default function LeftSidebar() {
         >
           <tbody>
             <tr className={styles.tableRow}>
-              <td className="smallFontSize">Default</td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td className="smallFontSize fw-bold">Token</td>
+              <td className="smallFontSize fw-bold">Change</td>
+              <td className="smallFontSize fw-bold">%</td>
+              <td className="smallFontSize fw-bold">Price</td>
             </tr>
 
             {loading ? (
@@ -79,20 +84,35 @@ export default function LeftSidebar() {
                 </td>
               </tr>
             ) : (
-              data.map((item, index) => (
-                <tr key={index} className={styles.tableRow}>
-                  <td className={`text-danger ${styles.tableColumn}`}>
-                    {item.name}
-                  </td>
-                  <td className={styles.tableColumn}>{item.change}%</td>
-                  <td className={`text-danger ${styles.tableColumn}`}>
-                    {item.percent}% <span>▼</span>
-                  </td>
-                  <td className={`text-danger ${styles.tableColumn}`}>
-                    ${item.price}
-                  </td>
-                </tr>
-              ))
+              data.map((item, index) => {
+                const isProfit = parseFloat(item.change) > 0
+                return (
+                  <tr key={index} className={styles.tableRow}>
+                    <td className={styles.tableColumn}>{item.name}</td>
+                    <td
+                      className={`${
+                        isProfit ? 'text-success' : 'text-danger'
+                      } ${styles.tableColumn}`}
+                    >
+                      {isProfit ? `+${item.change}` : item.change}
+                    </td>
+                    <td
+                      className={`${
+                        isProfit ? 'text-success' : 'text-danger'
+                      } ${styles.tableColumn}`}
+                    >
+                      {isProfit ? `+${item.percent}% ▲` : `${item.percent}% ▼`}
+                    </td>
+                    <td
+                      className={`${
+                        isProfit ? 'text-success' : 'text-danger'
+                      } ${styles.tableColumn}`}
+                    >
+                      ${item.price}
+                    </td>
+                  </tr>
+                )
+              })
             )}
           </tbody>
         </Table>
