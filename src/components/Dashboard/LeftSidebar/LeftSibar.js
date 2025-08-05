@@ -1,15 +1,38 @@
+import { useEffect, useState } from 'react'
 import { Col, Form, InputGroup, Table } from 'react-bootstrap'
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import { IoFilterOutline } from 'react-icons/io5'
 import styles from './LeftSidebar.module.css'
 
 export default function LeftSidebar() {
-  const data = Array.from({ length: 35 }).map(() => ({
-    name: 'NBCC NBCC NBCC NBCC NBCC NBCC NBCC NBCC NBCC ',
-    change: -400.43,
-    percent: -312510.9,
-    price: 109.25,
-  }))
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const res = await fetch('/api/fetchPrices')
+        const json = await res.json()
+        if (json.success) {
+          const pricesArray = Object.entries(json.prices).map(
+            ([name, price]) => ({
+              name,
+              price: price.toFixed(2),
+              change: (Math.random() * 10 - 5).toFixed(2), // Simulated
+              percent: (Math.random() * 10 - 5).toFixed(2), // Simulated
+            })
+          )
+          setData(pricesArray)
+        }
+      } catch (err) {
+        console.error('Error fetching prices:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPrices()
+  }, [])
 
   return (
     <Col className={`${styles.leftColumn} ${styles.leftColumnDisplay} pt-3`}>
@@ -49,20 +72,28 @@ export default function LeftSidebar() {
               <td></td>
             </tr>
 
-            {data.map((item, index) => (
-              <tr key={index} className={styles.tableRow}>
-                <td className={`text-danger ${styles.nameColumn}`}>
-                  {item.name}
-                </td>
-                <td className={styles.valueColumn}>{item.change}%</td>
-                <td className={`text-danger ${styles.valueColumn}`}>
-                  {item.percent}% <span>▼</span>
-                </td>
-                <td className={`text-danger ${styles.valueColumn}`}>
-                  {item.price}
+            {loading ? (
+              <tr>
+                <td colSpan="4" className="text-center">
+                  Loading...
                 </td>
               </tr>
-            ))}
+            ) : (
+              data.map((item, index) => (
+                <tr key={index} className={styles.tableRow}>
+                  <td className={`text-danger ${styles.tableColumn}`}>
+                    {item.name}
+                  </td>
+                  <td className={styles.tableColumn}>{item.change}%</td>
+                  <td className={`text-danger ${styles.tableColumn}`}>
+                    {item.percent}% <span>▼</span>
+                  </td>
+                  <td className={`text-danger ${styles.tableColumn}`}>
+                    ${item.price}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </div>

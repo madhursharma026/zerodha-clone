@@ -33,8 +33,7 @@
     height: 32px;
 }
 
-.nameColumn {
-    display: block;
+.tableColumn {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
